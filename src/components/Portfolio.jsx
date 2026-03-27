@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Database, Cpu } from 'lucide-react';
 
 const portfolioProjects = [
-  { id: "MOD_001", title: "PortFolio Website CV", img: "/assets/images/projects/PortFolio.png", category: "FRONT-END", link: "#", text: "Responsive personal CV website.", tags: ["HTML", "CSS", "JS"] },
+  { id: "MOD_001", title: "PortFolio Website CV", img: "/assets/images/projects/P.png", category: "FRONT-END", link: "#", text: "Responsive personal CV website.", tags: ["HTML", "CSS", "JS"] },
   { id: "MOD_003", title: "Perfectpixel Website", img: "/assets/images/projects/Perfectpixel.png", category: "FULL-STACK", link: "https://perfectpixels.co", text: "IT.Service Based Company Website Build Main Focuse on it.", tags: ["Next.js", "SANITY",'SQL', "Dashboard"] },
   { id: "MOD_004", title: "Badhuche", img: "/assets/images/projects/Badhuche.png", category: "FULL-STACK", link: "https://vrindaaagro.com/", text: "Website for show the work of Art in the website.", tags: ["NEXT.JS",'SANITY','NODE.JS', "Admin Pannel"] },
   { id: "MOD_005", title: "Vrinda Aagro", img: "/assets/images/projects/Vrinda.png", category: "FULL-STACK", link: "https://vrindaaagro.com/", text: "Product Based Company Website build which Focuse on the Prodct Show Case.", tags: ["Css3",'Next.js','Sanity','Mail Tio', "Admin Pannel"] },
