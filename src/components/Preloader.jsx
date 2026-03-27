@@ -9,12 +9,42 @@ export default function Preloader({ onComplete }) {
     "> ESTABLISHING SECURE_LINK..."
   ]);
 
+  const playBootSound = () => {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      
+      // Multi-tone notification
+      const frequencies = [440, 660, 880]; // A4, E5, A5 for a bright chord
+      
+      frequencies.forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        
+        gain.gain.setValueAtTime(0, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5 + (i * 0.1));
+        
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        osc.start(audioCtx.currentTime + (i * 0.05));
+        osc.stop(audioCtx.currentTime + 0.8);
+      });
+    } catch (e) {
+      console.warn("Audio Context blocked or unsupported");
+    }
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
-          setTimeout(onComplete, 500);
+          playBootSound();
+          setTimeout(onComplete, 800);
           return 100;
         }
         return prev + Math.floor(Math.random() * 15) + 5;
