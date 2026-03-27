@@ -9,33 +9,50 @@ export default function Preloader({ onComplete }) {
     "> ESTABLISHING SECURE_LINK..."
   ]);
 
-  const playBootSound = () => {
+  // Persistent AudioContext for performance
+  const [audioCtx] = useState(() => (typeof window !== 'undefined' && (window.AudioContext || window.webkitAudioContext)) ? new (window.AudioContext || window.webkitAudioContext)() : null);
+
+  const playTickSound = (freq = 800, volume = 0.05, duration = 0.05) => {
+    if (!audioCtx || audioCtx.state === 'suspended') return;
     try {
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
       
-      // Multi-tone notification
-      const frequencies = [440, 660, 880]; // A4, E5, A5 for a bright chord
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
       
+      gain.gain.setValueAtTime(0, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+      
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch (e) {}
+  };
+
+  const playBootSound = () => {
+    if (!audioCtx) return;
+    try {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      
+      const frequencies = [440, 660, 880];
       frequencies.forEach((freq, i) => {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        
         osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        
         gain.gain.setValueAtTime(0, audioCtx.currentTime);
         gain.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 0.05);
         gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5 + (i * 0.1));
-        
         osc.connect(gain);
         gain.connect(audioCtx.destination);
-        
         osc.start(audioCtx.currentTime + (i * 0.05));
         osc.stop(audioCtx.currentTime + 0.8);
       });
-    } catch (e) {
-      console.warn("Audio Context blocked or unsupported");
-    }
+    } catch (e) {}
   };
 
   useEffect(() => {
@@ -47,6 +64,7 @@ export default function Preloader({ onComplete }) {
           setTimeout(onComplete, 800);
           return 100;
         }
+        playTickSound(1200, 0.03, 0.03); // High-pitched fast tick
         return prev + Math.floor(Math.random() * 15) + 5;
       });
     }, 150);
@@ -59,7 +77,10 @@ export default function Preloader({ onComplete }) {
         "> OPTIMIZING ASSET_LOAD...",
         "> CLEARANCE GRANTED."
       ];
-      setLogs(prev => [...prev, newLogs[Math.floor(Math.random() * newLogs.length)]].slice(-6));
+      setLogs(prev => {
+        playTickSound(400, 0.05, 0.1); // Lower-pitched log chime
+        return [...prev, newLogs[Math.floor(Math.random() * newLogs.length)]].slice(-6);
+      });
     }, 400);
 
     return () => {
