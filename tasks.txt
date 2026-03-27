@@ -1,0 +1,6 @@
+1)Fix responsiveness
+2)Add skills section
+3)Add blog images from pinterest etc
+4)Add toggle theme funtionality 
+5)Complete overall portfolio
+6)On-scroll animation

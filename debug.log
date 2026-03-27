@@ -1,0 +1,71 @@
+﻿node.exe : [31mfailed 
+to load config from D:\
+Portfolio1\vite.config.
+js[39m
+At line:1 char:1
++ & "D:\all software 
+sem 5\node 
+js/node.exe" "D:\all 
+software sem 5\nod ...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: ([31mfailed t   
+ o ....config.js[3    
+9m:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+[31merror during 
+build:
+Error [ERR_PACKAGE_PATH
+_NOT_EXPORTED]: 
+Package subpath 
+'./internal' is not 
+defined by "exports" 
+in D:\Portfolio1\node_m
+odules\vite\package.jso
+n imported from D:\Port
+folio1\node_modules\@vi
+tejs\plugin-react\dist\
+index.js
+    at exportsNotFound 
+(node:internal/modules/
+esm/resolve:313:10)
+    at 
+packageExportsResolve (
+node:internal/modules/e
+sm/resolve:661:9)
+    at packageResolve (
+node:internal/modules/e
+sm/resolve:774:12)
+    at moduleResolve (n
+ode:internal/modules/es
+m/resolve:858:18)
+    at defaultResolve (
+node:internal/modules/e
+sm/resolve:990:11)
+    at 
+#cachedDefaultResolve (
+node:internal/modules/e
+sm/loader:718:20)
+    at #resolveAndMaybe
+BlockOnLoaderThread (no
+de:internal/modules/esm
+/loader:735:38)
+    at ModuleLoader.res
+olveSync (node:internal
+/modules/esm/loader:764
+:52)
+    at #resolve (node:i
+nternal/modules/esm/loa
+der:700:17)
+    at ModuleLoader.get
+OrCreateModuleJob (node
+:internal/modules/esm/l
+oader:620:35)[39m
