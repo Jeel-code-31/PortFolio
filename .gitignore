@@ -1,0 +1,11 @@
+node_modules
+dist
+.env
+*.log
+.vscode
+.DS_Store
+package-lock.json
+build-verify*
+build.txt
+cv_dump.txt
+parse_cv*
