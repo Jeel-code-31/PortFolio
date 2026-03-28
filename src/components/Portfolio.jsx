@@ -7,7 +7,7 @@ const portfolioProjects = [
   { id: "MOD_003", title: "Perfectpixel Website", img: "/assets/images/projects/PP.png", category: "FULL-STACK", link: "https://perfectpixel.co.in/", text: "IT.Service Based Company Website Build Main Focuse on it.", tags: ["Next.js", "SANITY",'SQL', "Dashboard"] },
   { id: "MOD_004", title: "Badhuche", img: "/assets/images/projects/B.png", category: "FULL-STACK", link: "https://www.badhuche.co.in/", text: "Website for show the work of Art in the website.", tags: ["NEXT.JS",'SANITY','NODE.JS', "Admin Pannel"] },
   { id: "MOD_005", title: "Vrinda Aagro", img: "/assets/images/projects/Vrinda.png", category: "FULL-STACK", link: "https://vrindaaagro.com/", text: "Product Based Company Website build which Focuse on the Prodct Show Case.", tags: ["Css3",'Next.js','Sanity','Mail Tio', "Admin Pannel"] },
-  { id: "MOD_006", title: "Kailas Engineering", img: "/assets/images/projects/Kailas.png", category: "FRONT-END", link: "https://kailasengineering.com/", text: "React web app for managing events.", tags: ["WordPress",'PHP', "State Management"] },
+  { id: "MOD_006", title: "Kailas Engineering", img: "/assets/images/projects/Kailas.png", category: "FRONT-END", link: "https://kailasengineering.com/", text: "Main purpose of web is to show the productivity and machines uses Maintainance.", tags: ["WordPress",'PHP', "State Management"] },
   {id:' MOD_007', title:'OM SAI LADIES TAILOR',img:'/assets/images/projects/Tailor.png',category:'FRONT-END',link:'https://om-sai-ladies-tailor.vercel.app/',text:'FREELANCE:-Tailoring Service Based Shop',tags:["WordPress",'PHP']}
 ];
 
