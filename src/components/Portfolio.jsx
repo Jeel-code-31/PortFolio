@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Database, Cpu } from 'lucide-react';
 
 const portfolioProjects = [
-  { id: "MOD_001", title: "PortFolio Website CV", img: "/assets/images/projects/P.png", category: "FRONT-END", link: "#", text: "Responsive personal CV website.", tags: ["HTML", "CSS", "JS"] },
-  { id: "MOD_003", title: "Perfectpixel Website", img: "/assets/images/projects/Perfectpixel.png", category: "FULL-STACK", link: "https://perfectpixels.co", text: "IT.Service Based Company Website Build Main Focuse on it.", tags: ["Next.js", "SANITY",'SQL', "Dashboard"] },
-  { id: "MOD_004", title: "Badhuche", img: "/assets/images/projects/Badhuche.png", category: "FULL-STACK", link: "https://vrindaaagro.com/", text: "Website for show the work of Art in the website.", tags: ["NEXT.JS",'SANITY','NODE.JS', "Admin Pannel"] },
+  { id: "MOD_001", title: "PortFolio Website CV", img: "/assets/images/projects/P.png", category: "FRONT-END", link: "https://github.com/Jeel-code-31/PortFolio", text: "Responsive personal CV website.", tags: ["HTML", "CSS", "JS"] },
+  { id: "MOD_003", title: "Perfectpixel Website", img: "/assets/images/projects/Perfectpixel.png", category: "FULL-STACK", link: "https://perfectpixel.co.in/", text: "IT.Service Based Company Website Build Main Focuse on it.", tags: ["Next.js", "SANITY",'SQL', "Dashboard"] },
+  { id: "MOD_004", title: "Badhuche", img: "/assets/images/projects/Badhuche.png", category: "FULL-STACK", link: "https://www.badhuche.co.in/", text: "Website for show the work of Art in the website.", tags: ["NEXT.JS",'SANITY','NODE.JS', "Admin Pannel"] },
   { id: "MOD_005", title: "Vrinda Aagro", img: "/assets/images/projects/Vrinda.png", category: "FULL-STACK", link: "https://vrindaaagro.com/", text: "Product Based Company Website build which Focuse on the Prodct Show Case.", tags: ["Css3",'Next.js','Sanity','Mail Tio', "Admin Pannel"] },
   { id: "MOD_006", title: "Kailas Engineering", img: "/assets/images/projects/Kailas.png", category: "FRONT-END", link: "https://kailasengineering.com/", text: "React web app for managing events.", tags: ["WordPress",'PHP', "State Management"] },
   {id:' MOD_007', title:'OM SAI LADIES TAILOR',img:'/assets/images/projects/sai.png',category:'FRONT-END',link:'https://om-sai-ladies-tailor.vercel.app/',text:'FREELANCE:-Tailoring Service Based Shop',tags:["WordPress",'PHP']}
