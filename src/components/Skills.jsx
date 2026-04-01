@@ -3,21 +3,21 @@ import { motion } from 'framer-motion';
 import { Cpu } from 'lucide-react';
 
 const techSkills = [
-  { name: 'HTML5', color: '#E34F26', short: 'HT' },
-  { name: 'CSS3', color: '#1572B6', short: 'CS' },
-  { name: 'JS', color: '#F7DF1E', short: 'JS' },
-  { name: 'React', color: '#61DAFB', short: 'RE' },
-  { name: 'Next.js', color: '#00f0ff', short: 'NX' },
-  { name: 'Tailwind', color: '#38B2AC', short: 'TW' },
-  { name: 'Node.js', color: '#339933', short: 'NO' },
-  { name: 'C#', color: '#a179dc', short: 'C#' },
-  { name: 'PHP', color: '#777BB4', short: 'PH' },
-  { name: 'SQL', color: '#4479A1', short: 'SQ' },
-  { name: 'MongoDB', color: '#47A248', short: 'MD' },
-  { name: 'Figma', color: '#F24E1E', short: 'FI' },
-  { name: 'Sanity', color: '#F03E2F', short: 'SA' },
-  { name: 'Vercel', color: '#ffffff', short: 'VE' },
-  { name: 'Wordpress', color: '#21759B', short: 'WP' }
+  { name: 'HTML5', color: '#E34F26', slug: 'html5' },
+  { name: 'CSS3', color: '#1572B6', slug: 'css3' },
+  { name: 'JS', color: '#F7DF1E', slug: 'javascript' },
+  { name: 'React', color: '#61DAFB', slug: 'react' },
+  { name: 'Next.js', color: '#000000', slug: 'nextdotjs' },
+  { name: 'Tailwind', color: '#06B6D4', slug: 'tailwindcss' },
+  { name: 'Node.js', color: '#339933', slug: 'nodedotjs' },
+  { name: 'C#', color: '#512BD4', slug: 'csharp' },
+  { name: 'PHP', color: '#777BB4', slug: 'php' },
+  { name: 'SQL', color: '#4479A1', slug: 'mysql' },
+  { name: 'MongoDB', color: '#47A248', slug: 'mongodb' },
+  { name: 'Figma', color: '#F24E1E', slug: 'figma' },
+  { name: 'Sanity', color: '#F03E2F', slug: 'sanity' },
+  { name: 'Vercel', color: '#FFFFFF', slug: 'vercel' },
+  { name: 'Wordpress', color: '#21759B', slug: 'wordpress' }
 ];
 
 export default function Skills() {
@@ -115,12 +115,20 @@ export default function Skills() {
                 style={{ backgroundColor: skill.color }}
               />
 
-              {/* Icon Placeholder */}
+              {/* Original Icon */}
               <div 
-                className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl font-black shadow-[0_4px_10px_rgba(0,0,0,0.5)] relative z-10"
-                style={{ backgroundColor: skill.color, color: skill.short === 'VE' || skill.short === 'NX' ? '#000' : '#fff' }}
+                className="w-16 h-16 flex items-center justify-center p-2 group-hover:bg-white/5 rounded-2xl transition-all duration-300 relative z-10"
               >
-                {skill.short}
+                <img 
+                  src={`https://cdn.simpleicons.org/${skill.slug}/${skill.color.replace('#', '')}`}
+                  alt={skill.name}
+                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'block';
+                  }}
+                />
+                <span className="hidden font-mono text-xl font-black text-white">{skill.name.charAt(0)}</span>
               </div>
               
               <span className="font-mono text-sm font-bold text-gray-300 tracking-wide relative z-10 group-hover:text-white transition-colors">
