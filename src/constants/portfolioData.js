@@ -6,7 +6,8 @@ export const experiences = [
     role: "JR. WEBSITE DEVELOPER",
     company: "Perfect Pixels",
     link: "https://www.perfectpixel.co.in",
-    duration: "Sep 2025 – Present",
+    startDate: "2025-09-01",
+    endDate: null, // Present
     description: "Develop modern web interfaces and managing Wordpress architecture, building scalable digital assets with pixel-perfect precision.",
     skills: ["Next.js", "Sanity", "Node.js", "Wordpress", "Github",'vercel','css3']
   },
@@ -15,7 +16,8 @@ export const experiences = [
     role: "Intern. Web Development",
     company: "Venom Technologies",
     link: "https://www.venomtechnologies.in",
-    duration: "March 2025 – Sep 2025",
+    startDate: "2025-03-27",
+    endDate: "2025-09-29",
     description: "Spearheaded the development of high-performance internal dashboards. Focused on bridging the gap between complex data and intuitive user interfaces.",
     skills: ["ReactJS", "Node.js", "Vercel","css3"]
   }

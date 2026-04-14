@@ -4,7 +4,31 @@ import { Network, Database, Briefcase, Layers, Zap, Code, Building } from 'lucid
 import { experiences, portfolioProjects, PRO_START_DATE } from '../constants/portfolioData';
 
 export default function Experience() {
-  const calculateExperience = () => {
+  const calculateDuration = (startStr, endStr) => {
+    const start = new Date(startStr);
+    const end = endStr ? new Date(endStr) : new Date();
+    
+    let years = end.getFullYear() - start.getFullYear();
+    let months = end.getMonth() - start.getMonth();
+
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+
+    const durationText = [];
+    if (years > 0) durationText.push(`${years} ${years === 1 ? 'yr' : 'yrs'}`);
+    if (months > 0) durationText.push(`${months} ${months === 1 ? 'mo' : 'mos'}`);
+    
+    const dateRange = `${start.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} – ${endStr ? new Date(endStr).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Present'}`;
+    
+    return { 
+      range: dateRange, 
+      duration: durationText.length > 0 ? `(${durationText.join(' ')})` : '(0 mos)' 
+    };
+  };
+
+  const calculateTotalExperience = () => {
     const start = new Date(PRO_START_DATE);
     const now = new Date();
     let years = now.getFullYear() - start.getFullYear();
@@ -18,7 +42,7 @@ export default function Experience() {
     return { years, months };
   };
 
-  const { years, months } = calculateExperience();
+  const { years: totalYears, months: totalMonths } = calculateTotalExperience();
 
   // Additional stats calculation
   const totalProjects = portfolioProjects.length;
@@ -51,7 +75,7 @@ export default function Experience() {
               <p className="text-[10px] font-mono text-secondary/60 tracking-widest uppercase">Exp Runtime</p>
             </div>
             <h4 className="text-lg font-bold text-white font-mono">
-              {years > 0 && `${years}Y `}{months}M+ <span className="text-[10px] font-normal text-gray-500 block">Professional</span>
+              {totalYears > 0 && `${totalYears}Y `}{totalMonths}M+ <span className="text-[10px] font-normal text-gray-500 block">Professional</span>
             </h4>
           </motion.div>
 
@@ -133,9 +157,14 @@ export default function Experience() {
                       @ {exp.company}
                     </a>
                   </div>
-                  <span className="font-mono text-sm px-4 py-2 border border-white/10 bg-white/5 text-gray-400">
-                    {exp.duration}
-                  </span>
+                  <div className="flex flex-col items-end gap-1">
+                    <span className="font-mono text-sm px-4 py-2 border border-white/10 bg-white/5 text-gray-400">
+                      {calculateDuration(exp.startDate, exp.endDate).range}
+                    </span>
+                    <span className="font-mono text-[10px] text-secondary/70 uppercase tracking-tighter">
+                      {calculateDuration(exp.startDate, exp.endDate).duration}
+                    </span>
+                  </div>
                 </div>
 
                 <p className="text-gray-400 leading-relaxed mb-6 font-mono text-sm relative z-10">

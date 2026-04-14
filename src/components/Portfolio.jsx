@@ -37,7 +37,7 @@ export default function Portfolio() {
           ))}
         </div>
 
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div layout className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
           <AnimatePresence mode='popLayout'>
             {filteredProjects.map((project) => (
               <motion.div
@@ -47,7 +47,7 @@ export default function Portfolio() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
                 key={project.id}
-                className="os-panel group hover:border-primary/60 transition-colors"
+                className="os-panel group hover:border-primary/60 transition-colors break-inside-avoid mb-6"
               >
                 {/* Header terminal bar */}
                 <div className="flex items-center justify-between px-4 py-2 bg-black/40 border-b border-white/5 font-mono text-xs">
@@ -60,13 +60,13 @@ export default function Portfolio() {
                 </div>
 
                 {/* Project Image Area */}
-                <div className="relative aspect-video overflow-hidden p-4">
-                  <div className="absolute inset-0  mix-blend-overlay pointer-events-none z-10" />
+                <div className="relative overflow-hidden p-4 bg-white/5">
+                  <div className="absolute inset-0 mix-blend-overlay pointer-events-none z-10" />
                   <img
                     src={project.img}
                     alt={project.title}
                     loading="lazy"
-                    className="w-full h-full object-cover object-top  transition-opacity duration-300 border border-white/5"
+                    className="w-full h-auto object-contain transition-opacity duration-300 border border-white/5 shadow-2xl"
                     onError={(e) => { e.target.src = "https://via.placeholder.com/600x400/0a0a0a/00f0ff?text=SYS_IMG_MISSING"; }}
                   />
 
