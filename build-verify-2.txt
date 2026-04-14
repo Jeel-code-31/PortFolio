@@ -1,13 +1,0 @@
-
-> strategic-design-project@1.0.0 build
-> vite build
-
-[36mvite v8.0.3 [32mbuilding client environment for production...[36m[39m
-[2Ktransforming...✓ 2128 modules transformed.
-rendering chunks...
-computing gzip size...
-dist/index.html                   0.76 kB │ gzip:   0.45 kB
-dist/assets/index-D6B39GWU.css   21.79 kB │ gzip:   4.74 kB
-dist/assets/index-D7LZ_0Vh.js   345.80 kB │ gzip: 109.21 kB
-
-[32m✓ built in 4.05s[39m

@@ -28,8 +28,8 @@ export default function Portfolio() {
               key={cat}
               onClick={() => setFilter(cat)}
               className={`px-4 py-2 border uppercase tracking-wider transition-colors ${filter === cat
-                  ? "bg-primary/20 text-primary border-primary shadow-[0_0_10px_rgba(0,240,255,0.2)]"
-                  : "bg-transparent text-gray-500 border-white/10 hover:border-white/30 hover:text-white"
+                ? "bg-primary/20 text-primary border-primary shadow-[0_0_10px_rgba(0,240,255,0.2)]"
+                : "bg-transparent text-gray-500 border-white/10 hover:border-white/30 hover:text-white"
                 }`}
             >
               [{cat}]
@@ -37,7 +37,7 @@ export default function Portfolio() {
           ))}
         </div>
 
-        <motion.div layout className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
           <AnimatePresence mode='popLayout'>
             {filteredProjects.map((project) => (
               <motion.div
@@ -47,7 +47,7 @@ export default function Portfolio() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
                 key={project.id}
-                className="os-panel group hover:border-primary/60 transition-colors break-inside-avoid mb-6"
+                className="os-panel group hover:border-primary/60 transition-colors h-full flex flex-col"
               >
                 {/* Header terminal bar */}
                 <div className="flex items-center justify-between px-4 py-2 bg-black/40 border-b border-white/5 font-mono text-xs">
@@ -60,13 +60,13 @@ export default function Portfolio() {
                 </div>
 
                 {/* Project Image Area */}
-                <div className="relative overflow-hidden p-4 bg-white/5">
-                  <div className="absolute inset-0 mix-blend-overlay pointer-events-none z-10" />
+                <div className="relative overflow-hidden p-4 bg-white/5 flex-shrink-0">
+                  <div className="absolute inset-0  mix-blend-overlay pointer-events-none z-10" />
                   <img
                     src={project.img}
                     alt={project.title}
                     loading="lazy"
-                    className="w-full h-auto object-contain transition-opacity duration-300 border border-white/5 shadow-2xl"
+                    className="w-full h-auto object-contain transition-opacity duration-300 border border-white/5 shadow-inner"
                     onError={(e) => { e.target.src = "https://via.placeholder.com/600x400/0a0a0a/00f0ff?text=SYS_IMG_MISSING"; }}
                   />
 

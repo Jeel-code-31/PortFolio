@@ -16,15 +16,15 @@ export default function Experience() {
       months += 12;
     }
 
-    const durationText = [];
-    if (years > 0) durationText.push(`${years} ${years === 1 ? 'yr' : 'yrs'}`);
-    if (months > 0) durationText.push(`${months} ${months === 1 ? 'mo' : 'mos'}`);
+    const durationParts = [];
+    if (years > 0) durationParts.push(`${years} ${years === 1 ? 'yr' : 'yrs'}`);
+    if (months > 0) durationParts.push(`${months} ${months === 1 ? 'mo' : 'mos'}`);
     
-    const dateRange = `${start.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} – ${endStr ? new Date(endStr).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Present'}`;
+    const range = `${start.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} – ${endStr ? new Date(endStr).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Present'}`;
     
     return { 
-      range: dateRange, 
-      duration: durationText.length > 0 ? `(${durationText.join(' ')})` : '(0 mos)' 
+      range, 
+      duration: durationParts.length > 0 ? `(${durationParts.join(' ')})` : '(0 mos)' 
     };
   };
 
@@ -39,10 +39,10 @@ export default function Experience() {
       months += 12;
     }
 
-    return { years, months };
+    return { totalYears: years, totalMonths: months };
   };
 
-  const { years: totalYears, months: totalMonths } = calculateTotalExperience();
+  const { totalYears, totalMonths } = calculateTotalExperience();
 
   // Additional stats calculation
   const totalProjects = portfolioProjects.length;
@@ -62,7 +62,7 @@ export default function Experience() {
         </div>
         {/* Experience Stats Dashboard */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 mt-6">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -79,7 +79,7 @@ export default function Experience() {
             </h4>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -97,7 +97,7 @@ export default function Experience() {
             </h4>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -115,7 +115,7 @@ export default function Experience() {
             </h4>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
