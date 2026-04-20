@@ -5,17 +5,27 @@ import { BookOpen } from 'lucide-react';
 const educationLevels = [
   {
     id: "KNOWLEDGE_001",
-    degree: "Bachelor of Computer Applications (BCA)",
-    institution: "Graduation",
-    duration: "Completed",
+    degree: "Master of Computer Applications (MCA)",
+    institution: "Sardar Institue of Science & Technology For Advance Studies & Research (ISTAR) - CVM University",
+    duration: "2026-Present",
+    status: "Pursuing",
     description: "Focused on core programming principles, systemic logic, and full-stack software engineering structures.",
   },
   {
     id: "KNOWLEDGE_002",
+    degree: "Bachelor of Computer Applications (BCA)",
+    institution: "D.N Institue of Computer Applications - S.P. University",
+    duration: "2021-2024",
+    status: "Completed",
+    description: "Focused on core programming principles, systemic logic, and full-stack software engineering structures.",
+  },
+  {
+    id: "KNOWLEDGE_003",
     degree: "12th Grade (HSC)",
-    institution: "Higher Secondary Education",
-    duration: "Completed",
-    description: "Strengthened fundamentals in advanced logic and applied sciences, serving as the foundation for computational reasoning.",
+    institution: "MVS High School",
+    duration: "2020-2021",
+    status: "Completed",
+    description: "Strengthened fundamentals in advanced logic and applied Commerce, serving as the foundation for computational reasoning.",
   }
 ];
 
@@ -50,9 +60,32 @@ export default function Education() {
                     @ {edu.institution}
                   </span>
                 </div>
-                <span className="font-mono text-xs px-4 py-2 border border-white/10 bg-black/40 text-gray-400 self-start md:self-auto uppercase tracking-widest">
-                  {edu.duration}
-                </span>
+                <div className="flex flex-col md:items-end gap-2 self-start md:self-auto group/edu w-fit">
+                  <div className="font-mono text-xs inline-flex items-stretch border border-white/10 bg-black/40 rounded-sm overflow-hidden w-fit">
+                    <span className="px-3 py-1.5 text-gray-400 border-r border-white/10 flex items-center whitespace-nowrap">
+                      {edu.duration}
+                    </span>
+                    {edu.status === 'Pursuing' ? (
+                      <div className="relative overflow-hidden flex items-center justify-center bg-primary/10 px-3 py-1.5 cursor-default whitespace-nowrap">
+                         <div className="absolute inset-0 bg-primary/20 translate-y-full group-hover/edu:translate-y-0 transition-transform duration-300 ease-out" />
+                        <span className="relative z-10 flex items-center gap-2 text-primary font-bold tracking-widest text-[10px] uppercase group-hover/edu:text-white transition-colors duration-300">
+                          <span className="relative flex h-1.5 w-1.5">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary"></span>
+                          </span>
+                          {edu.status}
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center bg-white/5 px-3 py-1.5 cursor-default group-hover/edu:bg-white/10 transition-colors duration-300 whitespace-nowrap">
+                        <span className="flex items-center gap-2 text-gray-400 font-bold tracking-widest text-[10px] uppercase">
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-secondary/70"></span>
+                          {edu.status}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
               
               <p className="text-gray-400 leading-relaxed font-mono text-sm relative z-10 mt-4 border-l-2 border-white/10 pl-4">

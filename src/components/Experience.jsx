@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Network, Database, Briefcase, Layers, Zap, Code, Building } from 'lucide-react';
+import { Network, Database, Briefcase, Layers, Zap, Code, Building, Award } from 'lucide-react';
 import { experiences, portfolioProjects, PRO_START_DATE } from '../constants/portfolioData';
 
 export default function Experience() {
@@ -10,6 +10,10 @@ export default function Experience() {
     
     let years = end.getFullYear() - start.getFullYear();
     let months = end.getMonth() - start.getMonth();
+
+    if (end.getDate() < start.getDate()) {
+      months--;
+    }
 
     if (months < 0) {
       years--;
@@ -24,6 +28,9 @@ export default function Experience() {
     
     return { 
       range, 
+      startFormat: start.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+      endFormat: endStr ? new Date(endStr).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Present',
+      isPresent: !endStr,
       duration: durationParts.length > 0 ? `(${durationParts.join(' ')})` : '(0 mos)' 
     };
   };
@@ -34,15 +41,37 @@ export default function Experience() {
     let years = now.getFullYear() - start.getFullYear();
     let months = now.getMonth() - start.getMonth();
 
+    if (now.getDate() < start.getDate()) {
+      months--;
+    }
+
     if (months < 0) {
       years--;
       months += 12;
     }
 
-    return { totalYears: years, totalMonths: months };
+    const pastMonthDate = new Date(now.getFullYear(), now.getMonth(), start.getDate());
+    if (now.getDate() < start.getDate()) {
+      pastMonthDate.setMonth(pastMonthDate.getMonth() - 1);
+    }
+    const diffTime = Math.abs(now - pastMonthDate);
+    const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+
+    return { totalYears: years, totalMonths: months, days, hours, minutes, seconds };
   };
 
-  const { totalYears, totalMonths } = calculateTotalExperience();
+  const [runtime, setRuntime] = useState(() => calculateTotalExperience());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setRuntime(calculateTotalExperience());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Additional stats calculation
   const totalProjects = portfolioProjects.length;
@@ -74,8 +103,11 @@ export default function Experience() {
               </div>
               <p className="text-[10px] font-mono text-secondary/60 tracking-widest uppercase">Exp Runtime</p>
             </div>
-            <h4 className="text-lg font-bold text-white font-mono">
-              {totalYears > 0 && `${totalYears}Y `}{totalMonths}M+ <span className="text-[10px] font-normal text-gray-500 block">Professional</span>
+            <h4 className="flex flex-col gap-1">
+              <span className="text-lg font-bold text-white font-mono leading-none">
+                {runtime.totalYears > 0 && `${runtime.totalYears}Y `}{runtime.totalMonths}M {runtime.days}D
+              </span>
+              <span className="text-[12px] font-mono text-gray-500 uppercase mt-5">Professional</span>
             </h4>
           </motion.div>
 
@@ -93,7 +125,7 @@ export default function Experience() {
               <p className="text-[10px] font-mono text-primary/60 tracking-widest uppercase">Deployment Project's</p>
             </div>
             <h4 className="text-lg font-bold text-white font-mono">
-              {totalProjects.toString().padStart(2, '0')} <span className="text-[10px] font-normal text-gray-500 block">Completed</span>
+              {totalProjects.toString().padStart(2, '0')} <span className="text-[12px] font-normal text-gray-500 block">Completed</span>
             </h4>
           </motion.div>
 
@@ -111,7 +143,7 @@ export default function Experience() {
               <p className="text-[10px] font-mono text-gray-500 tracking-widest uppercase">Tech Stack</p>
             </div>
             <h4 className="text-lg font-bold text-white font-mono">
-              {totalSkills.toString().padStart(2, '0')}+ <span className="text-[10px] font-normal text-gray-500 block">Tools Used</span>
+              {totalSkills.toString().padStart(2, '0')}+ <span className="text-[12px] font-normal text-gray-500 block">Tools Used</span>
             </h4>
           </motion.div>
 
@@ -129,12 +161,14 @@ export default function Experience() {
               <p className="text-[10px] font-mono text-gray-500 tracking-widest uppercase">Companies</p>
             </div>
             <h4 className="text-lg font-bold text-white font-mono">
-              {totalCompanies.toString().padStart(2, '0')} <span className="text-[10px] font-normal text-gray-500 block">Collaborated</span>
+              {totalCompanies.toString().padStart(2, '0')} <span className="text-[12px] font-normal text-gray-500 block">Collaborated</span>
             </h4>
           </motion.div>
         </div>
         <div className="relative border-l border-white/10 ml-4 md:ml-8 space-y-16">
-          {experiences.map((exp, index) => (
+          {experiences.map((exp, index) => {
+            const expDuration = calculateDuration(exp.startDate, exp.endDate);
+            return (
             <motion.div
               key={exp.id}
               initial={{ opacity: 0, x: -30 }}
@@ -157,12 +191,30 @@ export default function Experience() {
                       @ {exp.company}
                     </a>
                   </div>
-                  <div className="flex flex-col items-end gap-1">
-                    <span className="font-mono text-sm px-4 py-2 border border-white/10 bg-white/5 text-gray-400">
-                      {calculateDuration(exp.startDate, exp.endDate).range}
-                    </span>
-                    <span className="font-mono text-[10px] text-secondary/70 uppercase tracking-tighter">
-                      {calculateDuration(exp.startDate, exp.endDate).duration}
+                  <div className="flex flex-col items-start md:items-end gap-1">
+                    <div className="font-mono text-sm flex items-stretch bg-white/5 border border-white/10 rounded-sm overflow-hidden group/date">
+                      <span className="px-3 py-1.5 text-gray-400 border-r border-white/10 flex items-center">
+                        {expDuration.startFormat}
+                      </span>
+                      {expDuration.isPresent ? (
+                        <div className="relative overflow-hidden flex items-center justify-center bg-primary/10 px-4 py-1.5 cursor-default">
+                           <div className="absolute inset-0 bg-primary/20 translate-y-full group-hover/date:translate-y-0 transition-transform duration-300 ease-out" />
+                           <span className="relative z-10 flex items-center gap-2 text-primary font-bold tracking-widest text-[11px] uppercase group-hover/date:text-white transition-colors duration-300">
+                             <span className="relative flex h-1.5 w-1.5">
+                               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary"></span>
+                             </span>
+                             PRESENT
+                           </span>
+                        </div>
+                      ) : (
+                        <span className="px-3 py-1.5 text-gray-500 bg-black/20 flex items-center">
+                          {expDuration.endFormat}
+                        </span>
+                      )}
+                    </div>
+                    <span className="font-mono text-[10px] text-secondary/70 uppercase tracking-tighter mt-1 hover:text-secondary transition-colors cursor-default">
+                      {expDuration.duration}
                     </span>
                   </div>
                 </div>
@@ -181,8 +233,10 @@ export default function Experience() {
               </div>
 
             </motion.div>
-          ))}
+            );
+          })}
         </div>
+
       </div>
     </section>
   );
