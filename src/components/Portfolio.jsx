@@ -37,20 +37,19 @@ export default function Portfolio() {
           ))}
         </div>
 
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+        <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode='popLayout'>
             {filteredProjects.map((project) => (
               <motion.div
-                layout
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
                 key={project.id}
-                className="os-panel group hover:border-primary/60 transition-colors h-full flex flex-col"
+                className="os-panel group hover:border-primary/60 transition-colors flex flex-col h-full"
               >
                 {/* Header terminal bar */}
-                <div className="flex items-center justify-between px-4 py-2 bg-black/40 border-b border-white/5 font-mono text-xs">
+                <div className="flex items-center justify-between px-4 py-2 bg-black/40 border-b border-white/5 font-mono text-xs z-10 shrink-0">
                   <span className="text-primary">{project.id}</span>
                   <div className="flex gap-2">
                     <span className="w-2 h-2 rounded-full bg-red-500/50" />
@@ -59,14 +58,12 @@ export default function Portfolio() {
                   </div>
                 </div>
 
-                {/* Project Image Area */}
-                <div className="relative overflow-hidden p-4 bg-white/5 flex-shrink-0">
-                  <div className="absolute inset-0  mix-blend-overlay pointer-events-none z-10" />
+                {/* Project Image Area (Full Bleed) */}
+                <div className="relative w-full aspect-video overflow-hidden shrink-0 border-b border-white/5 bg-white/5">
                   <img
                     src={project.img}
                     alt={project.title}
-                    loading="lazy"
-                    className="w-full h-auto object-contain transition-opacity duration-300 border border-white/5 shadow-inner"
+                    className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     onError={(e) => { e.target.src = "https://via.placeholder.com/600x400/0a0a0a/00f0ff?text=SYS_IMG_MISSING"; }}
                   />
 
@@ -79,11 +76,11 @@ export default function Portfolio() {
                 </div>
 
                 {/* Project Info */}
-                <div className="p-6 relative z-10">
+                <div className="p-6 relative z-10 flex flex-col flex-grow">
                   <h3 className="text-xl font-bold mb-2 text-white font-mono">{project.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed mb-6 font-mono">&gt; {project.text}</p>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-6 font-mono flex-grow">&gt; {project.text}</p>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mt-auto">
                     {project.tags.map(tag => (
                       <span key={tag} className="flex items-center gap-1 font-mono text-[10px] px-2 py-1 bg-white/5 text-gray-300 border border-white/10 uppercase tracking-widest">
                         <Database size={10} className="text-primary" /> {tag}

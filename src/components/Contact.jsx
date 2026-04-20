@@ -56,7 +56,7 @@ export default function Contact() {
           >
             <Radio size={16} className="animate-pulse" /> Initiate Contact
           </motion.div>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -64,7 +64,7 @@ export default function Contact() {
           >
             Open a Secure Channel
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -76,9 +76,9 @@ export default function Contact() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start max-w-5xl mx-auto">
-          
+
           {/* Contact Info */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -128,7 +128,7 @@ export default function Contact() {
           <div className="relative min-h-[400px]">
             <AnimatePresence mode="wait">
               {status !== 'success' ? (
-                <motion.form 
+                <motion.form
                   key="contact-form"
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -142,12 +142,12 @@ export default function Contact() {
                     <TerminalSquare size={20} className="text-primary" />
                     <h3 className="text-lg tracking-widest uppercase">Transmit Data</h3>
                   </div>
-                  
+
                   <div className="space-y-6">
                     <div>
                       <label className="block text-xs text-primary mb-2 tracking-widest uppercase">&gt; IDENTIFIER</label>
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         name="name"
                         required
                         disabled={status === 'submitting'}
@@ -157,8 +157,8 @@ export default function Contact() {
                     </div>
                     <div>
                       <label className="block text-xs text-primary mb-2 tracking-widest uppercase">&gt; RETURN ROUTE (EMAIL)</label>
-                      <input 
-                        type="email" 
+                      <input
+                        type="email"
                         name="email"
                         required
                         disabled={status === 'submitting'}
@@ -168,7 +168,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <label className="block text-xs text-primary mb-2 tracking-widest uppercase">&gt; PAYLOAD</label>
-                      <textarea 
+                      <textarea
                         name="message"
                         required
                         rows="4"
@@ -191,8 +191,8 @@ export default function Contact() {
                       )}
                     </AnimatePresence>
 
-                    <button 
-                      type="submit" 
+                    <button
+                      type="submit"
                       disabled={status === 'submitting'}
                       className="w-full bg-transparent border border-primary text-primary hover:bg-primary hover:text-background font-bold tracking-widest py-4 transition-all flex items-center justify-center gap-2 uppercase text-sm group mt-4 relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
                     >
@@ -265,7 +265,7 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  <button 
+                  <button
                     onClick={() => setStatus('idle')}
                     className="px-8 py-3 bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all text-xs tracking-widest uppercase font-bold"
                   >

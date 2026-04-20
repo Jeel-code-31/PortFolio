@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FileText, ArrowRight, Download } from 'lucide-react';
+import { ArrowRight, Download } from 'lucide-react';
 import StatusGrid from './StatusGrid';
 
 const GithubIcon = () => (
@@ -61,7 +61,7 @@ export default function Hero() {
               <span className="relative z-10 flex items-center gap-2">View Deployed Systems <ArrowRight size={16} /></span>
               <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
             </a>
-            <a href="/Jeel-Resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 uppercase tracking-widest text-gray-300 hover:text-white group border-r border-white/10 pr-6 mr-2">
+            <a href="/Jeel_Darji_Resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 uppercase tracking-widest text-gray-300 hover:text-white group border-r border-white/10 pr-6 mr-2">
               <Download size={16} className="text-secondary group-hover:-translate-y-1 transition-transform" /> Fetch CV
             </a>
             <div className="flex gap-4 items-center">
