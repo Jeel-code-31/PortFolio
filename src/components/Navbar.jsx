@@ -24,6 +24,22 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // NEW: Helper function to ensure navigation triggers correctly
+  const handleMobileNav = (e, href) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const elem = document.getElementById(targetId);
+    
+    setMobileMenuOpen(false); // Close menu first
+
+    if (elem) {
+      // Small timeout ensures the menu starts closing before the scroll begins
+      setTimeout(() => {
+        elem.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  };
+
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 font-mono ${scrolled ? 'bg-background/90 backdrop-blur-md border-b border-white/5 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.5)]' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
@@ -74,9 +90,11 @@ export default function Navbar() {
               {navLinks.map(link => (
                 <a
                   key={link.name}
+                  
                   href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-gray-300 hover:text-primary font-medium tracking-widest text-sm"
+                  // UPDATED: Use the helper function here
+                  onClick={(e) => handleMobileNav(e, link.href)}
+                  className="text-gray-300 hover:text-primary font-medium tracking-widest text-sm py-2"
                 >
                   {link.name}
                 </a>
