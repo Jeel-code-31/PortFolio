@@ -14,6 +14,14 @@ import {
 
 const CERTIFICATES = [
   {
+    id: "Seminar",
+    title: "React.js-How to make API Calls in smart Way (webinar)",
+    issuer: "TOPS Technologies Pvt. Ltd.",
+    date: "SEPTEMBER 2025",
+    file: "/Certifications/Certi6.pdf",
+    category: "Webinar",
+  },
+  {
     id: "CERT_01",
     title: "INTERNSHIP COMPLETION LETTER- 6 MONTHS",
     issuer: "VENOM TECHNOLOGIES ,ANAND",
