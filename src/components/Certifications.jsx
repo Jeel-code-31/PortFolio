@@ -15,6 +15,14 @@ import {
 const CERTIFICATES = [
   {
     id: "CERT_01",
+    title: "INTERNSHIP COMPLETION LETTER- 6 MONTHS",
+    issuer: "VENOM TECHNOLOGIES ,ANAND",
+    date: "SEPTEMBER 2025",
+    file: "/Certifications/IC.jpg",
+    category: "Professional",
+  },
+  {
+    id: "CERT_02",
     title: "REST API (INTERMEDIATE)",
     issuer: "HackerRank",
     date: "2026",
@@ -22,7 +30,7 @@ const CERTIFICATES = [
     category: "Technical",
   },
   {
-    id: "CERT_02",
+    id: "CERT_03",
     title: "Problem Solving IN C++ (BASIC)",
     issuer: "HackerRank",
     date: "2026",
@@ -30,7 +38,7 @@ const CERTIFICATES = [
     category: "Technical",
   },
   {
-    id: "CERT_03",
+    id: "CERT_04",
     title: "Backend SQL-DATABASE(ADVANCED)",
     issuer: "HackerRank",
     date: "2026",
@@ -38,7 +46,7 @@ const CERTIFICATES = [
     category: "Technical",
   },
   {
-    id: "CERT_04",
+    id: "CERT_05",
     title: "Front-end (REACT.js)",
     issuer: "HackerRank",
     date: "2026",
