@@ -1,11 +1,18 @@
 import React, { useState, Suspense, lazy } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
+import ProtectedRoute from './components/ProtectedRoute';
+import { useTrackVisit } from './hooks/useTrackVisit';
 
-// Lazy load non-critical sections
+// Admin Components
+const AdminLogin = lazy(() => import('./admin/Login'));
+const AdminDashboard = lazy(() => import('./admin/Dashboard'));
+
+// Portfolio Sections
 const Education = lazy(() => import('./components/Education'));
 const Skills = lazy(() => import('./components/Skills'));
 const Experience = lazy(() => import('./components/Experience'));
@@ -14,8 +21,9 @@ const Achievements = lazy(() => import('./components/Achievements'));
 const Certifications = lazy(() => import('./components/Certifications'));
 const Contact = lazy(() => import('./components/Contact'));
 
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
+// Portfolio Layout Wrapper with Tracking
+const PortfolioLayout = ({ isLoading, setIsLoading }) => {
+  useTrackVisit(); // Track visit only on main portfolio
 
   return (
     <div className="relative min-h-screen cursor-none selection:bg-primary/40 selection:text-white bg-background">
@@ -27,8 +35,6 @@ function App() {
         <>
           <CustomCursor />
           <div className="fixed inset-0 bg-background -z-20" />
-          
-          {/* Simplified Background */}
           <div className="fixed inset-0 opacity-10 bg-[linear-gradient(rgba(0,240,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(0,240,255,0.1)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none -z-10" />
 
           <Navbar />
@@ -56,6 +62,33 @@ function App() {
         </>
       )}
     </div>
+  );
+};
+
+function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <Suspense fallback={null}>
+      <Routes>
+        {/* Main Portfolio */}
+        <Route path="/" element={<PortfolioLayout isLoading={isLoading} setIsLoading={setIsLoading} />} />
+        
+        {/* Admin Routes */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route 
+          path="/admin/dashboard" 
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } 
+        />
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Suspense>
   );
 }
 
