@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import emailjs from '@emailjs/browser';
+import { trackVisitFirestore } from '../services/analytics';
 
 export const useTrackVisit = () => {
   useEffect(() => {
@@ -16,13 +17,16 @@ export const useTrackVisit = () => {
           page: window.location.pathname
         };
 
-        // 1. Log to Local SQL API
+        // 1. Log to Local SQL API (If URL override or env exists)
         const apiUrl = localStorage.getItem('VITE_API_URL_OVERRIDE') || import.meta.env.VITE_API_URL || 'http://localhost:5000';
-        await fetch(`${apiUrl}/api/track`, {
+        fetch(`${apiUrl}/api/track`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(visitData)
-        });
+        }).catch(() => {/* Silent fail for SQL */});
+
+        // 2. Log to Firestore (Live Fallback)
+        await trackVisitFirestore(visitData);
 
         // 2. Send Email Notification via EmailJS
         const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;

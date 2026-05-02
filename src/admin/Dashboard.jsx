@@ -31,6 +31,8 @@ import {
   Bar
 } from 'recharts';
 
+import { getFirestoreStats, getRecentVisitsFirestore } from '../services/analytics';
+
 const AdminDashboard = () => {
   const [visits, setVisits] = useState([]);
   const [stats, setStats] = useState({ 
@@ -53,15 +55,24 @@ const AdminDashboard = () => {
 
     try {
       const apiUrl = localStorage.getItem('VITE_API_URL_OVERRIDE') || import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const isLocalhost = apiUrl.includes('localhost');
+      const isLive = window.location.hostname !== 'localhost';
+
+      // If live but trying to connect to localhost, skip SQL and use Firestore immediately
+      if (isLive && isLocalhost) {
+        throw new Error('Using Firestore fallback');
+      }
       
-      // Fetch Stats & Visits in parallel
+      // Fetch Stats & Visits in parallel from SQL
       const [statsRes, visitsRes] = await Promise.all([
         fetch(`${apiUrl}/api/stats`, { headers: { 'Authorization': `Bearer ${token}` } }),
         fetch(`${apiUrl}/api/visits`, { headers: { 'Authorization': `Bearer ${token}` } })
       ]);
 
-      if (statsRes.ok) {
+      if (statsRes.ok && visitsRes.ok) {
         const statsData = await statsRes.json();
+        const visitsData = await visitsRes.json();
+        
         setStats(prev => ({
           ...prev,
           ...statsData,
@@ -69,21 +80,29 @@ const AdminDashboard = () => {
           topReferrers: statsData.topReferrers || [],
           devices: statsData.devices || []
         }));
-      }
 
-      if (visitsRes.ok) {
-        const visitsData = await visitsRes.json();
         if (Array.isArray(visitsData)) {
           setVisits(visitsData.map(v => ({
             ...v,
             timestamp: v.timestamp ? new Date(v.timestamp) : new Date()
           })));
         }
+      } else {
+        throw new Error('SQL fetch failed');
       }
-
-      setIsLoading(false);
     } catch (err) {
-      console.error("Dashboard fetch error:", err);
+      console.log("SQL failed or skipped, trying Firestore fallback...");
+      try {
+        const [firestoreStats, firestoreVisits] = await Promise.all([
+          getFirestoreStats(),
+          getRecentVisitsFirestore()
+        ]);
+        setStats(firestoreStats);
+        setVisits(firestoreVisits);
+      } catch (fErr) {
+        console.error("All data sources failed:", fErr);
+      }
+    } finally {
       setIsLoading(false);
     }
   };

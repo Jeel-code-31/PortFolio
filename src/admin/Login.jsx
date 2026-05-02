@@ -22,22 +22,38 @@ const AdminLogin = () => {
         body: JSON.stringify({ email, password })
       });
 
-      const data = await response.json();
-
       if (response.ok) {
+        const data = await response.json();
         localStorage.setItem('admin_token', data.token);
+        localStorage.setItem('auth_mode', 'sql');
         navigate('/admin/dashboard');
-      } else {
-        setError(data.error || 'Access Denied');
+        return;
       }
+      
+      const data = await response.json();
+      setError(data.error || 'Access Denied');
     } catch (err) {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      if (window.location.hostname !== 'localhost' && apiUrl.includes('localhost')) {
-        setError('Configuration Error: The live site is trying to connect to a local server. Please set the VITE_API_URL environment variable in Vercel to your live backend URL.');
-      } else {
-        setError('Connection failed. Is the server running?');
+      console.warn("SQL Login failed, trying Firebase fallback...", err);
+      try {
+        // Firebase Auth Fallback
+        const { signInWithEmailAndPassword } = await import('firebase/auth');
+        const { auth } = await import('../firebase');
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        
+        if (userCredential.user) {
+          localStorage.setItem('admin_token', 'firebase_active');
+          localStorage.setItem('auth_mode', 'firebase');
+          navigate('/admin/dashboard');
+        }
+      } catch (fbErr) {
+        const apiUrl = localStorage.getItem('VITE_API_URL_OVERRIDE') || import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        if (window.location.hostname !== 'localhost' && apiUrl.includes('localhost')) {
+          setError('Configuration Error: Both SQL and Firebase authentication failed. Please check your VITE_API_URL or Firebase config.');
+        } else {
+          setError('Authentication failed for all providers.');
+        }
+        console.error(fbErr);
       }
-      console.error(err);
     } finally {
       setIsLoading(false);
     }
