@@ -90,7 +90,39 @@ app.get('/api/stats', (req, res) => {
     jwt.verify(token, JWT_SECRET);
     const total = db.prepare('SELECT COUNT(*) as count FROM visits').get().count;
     const today = db.prepare("SELECT COUNT(*) as count FROM visits WHERE date(timestamp) = date('now')").get().count;
-    res.json({ total, today, unique: total });
+    
+    // Visits by day (last 7 days)
+    const visitsByDay = db.prepare(`
+      SELECT date(timestamp) as date, COUNT(*) as count 
+      FROM visits 
+      WHERE timestamp > date('now', '-7 days')
+      GROUP BY date(timestamp)
+      ORDER BY date ASC
+    `).all();
+
+    // Top referrers
+    const topReferrers = db.prepare(`
+      SELECT referrer, COUNT(*) as count 
+      FROM visits 
+      GROUP BY referrer 
+      ORDER BY count DESC 
+      LIMIT 5
+    `).all();
+
+    // Device breakdown
+    const devices = db.prepare(`
+      SELECT 
+        CASE 
+          WHEN userAgent LIKE '%Mobile%' THEN 'Mobile'
+          WHEN userAgent LIKE '%Tablet%' THEN 'Tablet'
+          ELSE 'Desktop'
+        END as device,
+        COUNT(*) as count
+      FROM visits
+      GROUP BY device
+    `).all();
+
+    res.json({ total, today, unique: total, visitsByDay, topReferrers, devices });
   } catch (err) {
     res.status(401).json({ error: 'Invalid token' });
   }
