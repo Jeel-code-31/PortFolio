@@ -52,7 +52,7 @@ const AdminDashboard = () => {
     }
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const apiUrl = localStorage.getItem('VITE_API_URL_OVERRIDE') || import.meta.env.VITE_API_URL || 'http://localhost:5000';
       
       // Fetch Stats & Visits in parallel
       const [statsRes, visitsRes] = await Promise.all([
@@ -62,7 +62,13 @@ const AdminDashboard = () => {
 
       if (statsRes.ok) {
         const statsData = await statsRes.json();
-        setStats(statsData);
+        setStats(prev => ({
+          ...prev,
+          ...statsData,
+          visitsByDay: statsData.visitsByDay || [],
+          topReferrers: statsData.topReferrers || [],
+          devices: statsData.devices || []
+        }));
       }
 
       if (visitsRes.ok) {

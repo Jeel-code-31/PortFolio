@@ -15,7 +15,7 @@ const AdminLogin = () => {
     setIsLoading(true);
     setError('');
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const apiUrl = localStorage.getItem('VITE_API_URL_OVERRIDE') || import.meta.env.VITE_API_URL || 'http://localhost:5000';
       const response = await fetch(`${apiUrl}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -31,7 +31,12 @@ const AdminLogin = () => {
         setError(data.error || 'Access Denied');
       }
     } catch (err) {
-      setError('Connection failed. Is the server running?');
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      if (window.location.hostname !== 'localhost' && apiUrl.includes('localhost')) {
+        setError('Configuration Error: The live site is trying to connect to a local server. Please set the VITE_API_URL environment variable in Vercel to your live backend URL.');
+      } else {
+        setError('Connection failed. Is the server running?');
+      }
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -92,10 +97,29 @@ const AdminLogin = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-red-500/10 border border-red-500/20 text-red-500 text-xs py-3 px-4 rounded-lg flex items-center gap-3 font-mono"
+              className="space-y-4"
             >
-              <AlertCircle className="w-4 h-4 flex-shrink-0" />
-              {error}
+              <div className="bg-red-500/10 border border-red-500/20 text-red-500 text-xs py-3 px-4 rounded-lg flex items-center gap-3 font-mono">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                {error}
+              </div>
+              
+              {error.includes('Configuration Error') && (
+                <div className="bg-primary/5 border border-primary/10 p-4 rounded-lg space-y-3">
+                  <p className="text-[10px] font-mono text-primary/60 uppercase tracking-widest">
+                    // Quick Fix: Override API Endpoint
+                  </p>
+                  <input 
+                    type="text" 
+                    placeholder="https://your-backend.onrender.com"
+                    className="w-full bg-black/40 border border-primary/20 rounded px-3 py-2 text-[10px] font-mono text-primary focus:outline-none focus:border-primary/50"
+                    onChange={(e) => localStorage.setItem('VITE_API_URL_OVERRIDE', e.target.value)}
+                  />
+                  <p className="text-[9px] text-white/30 italic">
+                    * Enter your live backend URL above and try logging in again.
+                  </p>
+                </div>
+              )}
             </motion.div>
           )}
 
