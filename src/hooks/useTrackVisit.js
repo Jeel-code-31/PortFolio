@@ -17,7 +17,8 @@ export const useTrackVisit = () => {
         };
 
         // 1. Log to Local SQL API
-        await fetch('http://localhost:5000/api/track', {
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        await fetch(`${apiUrl}/api/track`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(visitData)

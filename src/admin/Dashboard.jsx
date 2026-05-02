@@ -24,20 +24,21 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     const token = localStorage.getItem('admin_token');
     if (!token) {
-      navigate('/admin/login');
+      navigate('/admin');
       return;
     }
 
     try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
       // Fetch Stats
-      const statsRes = await fetch('http://localhost:5000/api/stats', {
+      const statsRes = await fetch(`${apiUrl}/api/stats`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const statsData = await statsRes.json();
       if (statsRes.ok) setStats(statsData);
 
       // Fetch Visits
-      const visitsRes = await fetch('http://localhost:5000/api/visits', {
+      const visitsRes = await fetch(`${apiUrl}/api/visits`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const visitsData = await visitsRes.json();
