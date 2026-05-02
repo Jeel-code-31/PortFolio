@@ -14,6 +14,10 @@ import {
 const VISITS_COLLECTION = 'visits';
 
 export const trackVisitFirestore = async (visitData) => {
+  if (!db) {
+    console.warn('[FIREBASE] Firestore not initialized. Skipping visit log.');
+    return;
+  }
   try {
     await addDoc(collection(db, VISITS_COLLECTION), {
       ...visitData,
@@ -26,6 +30,7 @@ export const trackVisitFirestore = async (visitData) => {
 };
 
 export const getFirestoreStats = async () => {
+  if (!db) return { total: 0, today: 0, unique: 0, visitsByDay: [], topReferrers: [], devices: [] };
   try {
     const visitsRef = collection(db, VISITS_COLLECTION);
     
@@ -84,6 +89,7 @@ export const getFirestoreStats = async () => {
 };
 
 export const getRecentVisitsFirestore = async (limitCount = 50) => {
+  if (!db) return [];
   try {
     const q = query(collection(db, VISITS_COLLECTION), orderBy('timestamp', 'desc'), limit(limitCount));
     const querySnapshot = await getDocs(q);

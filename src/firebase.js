@@ -11,6 +11,19 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+let app, auth, db;
+
+try {
+  if (import.meta.env.VITE_FIREBASE_API_KEY) {
+    app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+    console.log('[FIREBASE] Initialized successfully');
+  } else {
+    console.warn('[FIREBASE] Missing API Key. Firebase features will be disabled.');
+  }
+} catch (err) {
+  console.error('[FIREBASE] Initialization error:', err);
+}
+
+export { auth, db };
