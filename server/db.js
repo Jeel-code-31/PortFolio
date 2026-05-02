@@ -3,7 +3,8 @@ import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const db = new Database(join(__dirname, 'portfolio.db'), { verbose: console.log });
+const dbPath = process.env.DATABASE_PATH || join(__dirname, 'portfolio.db');
+const db = new Database(dbPath, { verbose: console.log });
 
 // Create Tables
 db.exec(`
