@@ -3,23 +3,23 @@ export const PRO_START_DATE = '2025-03-01'; // March 2025
 export const experiences = [
   {
     id: "EXP_001",
-    role: "JR. WEBSITE DEVELOPER",
+    role: "FULL-STACK WEB DEVELOPER",
     company: "Perfect Pixels",
     link: "https://www.perfectpixel.co.in",
     startDate: "2025-09-01",
     endDate: null, // Present
-    description: "Develop modern web interfaces and managing Wordpress architecture, building scalable digital assets with pixel-perfect precision.",
-    skills: ["Next.js", "Sanity", "Node.js", "Wordpress", "Github", 'vercel', 'css3']
+    description: "Develop modern web interfaces and managing backend architecture, building scalable digital assets with robust full-stack solutions.",
+    skills: ["Next.js", "Sanity", "Node.js", "React", "Github", 'vercel', 'css3']
   },
   {
     id: "EXP_002",
-    role: "Intern. Web Development",
+    role: "FULL-STACK DEVELOPER INTERN",
     company: "Venom Technologies",
     link: "https://www.venomtechnologies.in",
     startDate: "2025-03-27",
     endDate: "2025-09-29",
-    description: "Spearheaded the development of high-performance internal dashboards. Focused on bridging the gap between complex data and intuitive user interfaces.",
-    skills: ["ReactJS", "Node.js", "Vercel", "css3"]
+    description: "Spearheaded the development of high-performance internal dashboards. Focused on building robust APIs and intuitive user interfaces.",
+    skills: ["ReactJS", "Node.js", "Express", "MongoDB", "Vercel"]
   }
 ];
 

@@ -32,39 +32,54 @@ export default function Hero() {
           animate="visible"
           className="w-full relative z-10"
         >
-          {/* Status logs */}
-          <motion.div variants={itemVariants} className="font-mono text-xs md:text-sm text-primary mb-8 tracking-widest opacity-80 flex flex-col gap-1">
-            <span>&gt; SYSTEM INITIALIZED</span>
-            <span>&gt; DEVELOPER PROFILE LOADED</span>
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 1, 0] }}
-              transition={{ repeat: Infinity, duration: 1 }}
-              className="inline-block w-2 h-4 bg-primary ml-1 align-middle"
-            />
-          </motion.div>
+          {/* Status logs & Badge */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between w-full mb-8">
+            <motion.div variants={itemVariants} className="font-mono text-xs md:text-sm text-primary tracking-widest opacity-80 flex flex-col gap-1">
+              <span>&gt; SYSTEM INITIALIZED</span>
+              <span>&gt; DEVELOPER PROFILE LOADED</span>
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: [0, 1, 0] }}
+                transition={{ repeat: Infinity, duration: 1 }}
+                className="inline-block w-2 h-4 bg-primary ml-1 align-middle"
+              />
+            </motion.div>
+            
+            <motion.div variants={itemVariants} className="mt-6 md:mt-0 md:mr-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 font-mono text-xs font-bold tracking-widest uppercase relative overflow-hidden group">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span className="relative z-10">Available For Hire</span>
+                <div className="absolute inset-0 bg-green-500/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
+              </div>
+            </motion.div>
+          </div>
 
           <motion.h1 variants={itemVariants} className="text-5xl md:text-8xl font-black mb-4 tracking-tighter text-white drop-shadow-[0_0_15px_rgba(0,240,255,0.3)]">
             JEEL DARJI.
           </motion.h1>
 
           <motion.h2 variants={itemVariants} className="text-xl md:text-2xl font-mono text-secondary tracking-widest uppercase mb-8 ml-1">
-            Website DEVELOPER - UI/UX DESIGNER
+            FULL-STACK WEB DEVELOPER
           </motion.h2>
 
           <motion.p variants={itemVariants} className="text-gray-400 text-base md:text-lg leading-relaxed max-w-2xl mb-12 border-l-2 border-primary/30 pl-4">
-            A passionate web developer skilled in HTML, CSS, JavaScript, C#, PHP, and Python. Designing modern interfaces and building scalable digital assets with robust backend architectures.
+            A passionate Full-Stack Web Developer skilled in HTML, CSS, JavaScript, React, Node.js, PHP, and SQL. Building modern, scalable web applications with robust backend architectures and intuitive, responsive frontend designs.
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex flex-wrap gap-6 items-center font-mono text-sm">
-            <a href="#portfolio" className="relative group overflow-hidden px-8 py-4 bg-primary/10 border border-primary text-primary hover:text-background uppercase tracking-widest font-bold">
-              <span className="relative z-10 flex items-center gap-2">View Deployed Systems <ArrowRight size={16} /></span>
-              <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
+            <a href="#contact" className="relative group overflow-hidden px-8 py-4 bg-primary text-background uppercase tracking-widest font-bold shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:shadow-[0_0_30px_rgba(0,240,255,0.6)] transition-all">
+              <span className="relative z-10 flex items-center gap-2">Hire Me <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" /></span>
             </a>
-            <a href="/Jeel_Darji_Resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 uppercase tracking-widest text-gray-300 hover:text-white group border-r border-white/10 pr-6 mr-2">
+            <a href="#portfolio" className="relative group overflow-hidden px-6 py-4 bg-transparent border border-primary/50 text-primary hover:bg-primary/10 uppercase tracking-widest font-bold transition-all">
+              <span className="relative z-10 flex items-center gap-2">View Work</span>
+            </a>
+            <a href="/Jeel_Darji_Resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 uppercase tracking-widest text-gray-300 hover:text-white group border-l border-white/10 pl-6 ml-2">
               <Download size={16} className="text-secondary group-hover:-translate-y-1 transition-transform" /> Fetch CV
             </a>
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-4 items-center ml-auto md:ml-4">
               <a href="https://github.com/Jeel-code-31" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors p-2 hover:bg-white/5 rounded-lg border border-transparent hover:border-white/10">
                 <GithubIcon />
               </a>

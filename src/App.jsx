@@ -5,12 +5,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
-import ProtectedRoute from './components/ProtectedRoute';
 import { useTrackVisit } from './hooks/useTrackVisit';
-
-// Admin Components
-const AdminLogin = lazy(() => import('./admin/Login'));
-const AdminDashboard = lazy(() => import('./admin/Dashboard'));
 
 // Portfolio Sections
 const Education = lazy(() => import('./components/Education'));
@@ -73,17 +68,6 @@ function App() {
       <Routes>
         {/* Main Portfolio */}
         <Route path="/" element={<PortfolioLayout isLoading={isLoading} setIsLoading={setIsLoading} />} />
-        
-        {/* Admin Routes */}
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route 
-          path="/admin/dashboard" 
-          element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
-          } 
-        />
 
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />

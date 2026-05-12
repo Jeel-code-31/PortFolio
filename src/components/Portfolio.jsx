@@ -17,7 +17,7 @@ export default function Portfolio() {
         <div className="w-full flex items-center gap-4 mb-12">
           <Cpu size={24} className="text-primary" />
           <h2 className="text-3xl font-mono text-primary uppercase font-bold tracking-widest">
-            Deployed Systems
+            Featured Projects
           </h2>
           <div className="h-[1px] bg-primary/20 flex-1 ml-4" />
         </div>

@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import { Terminal, MapPin, Zap, Code } from 'lucide-react';
 
 const statusItems = [
-  { icon: <Terminal size={18} className="text-primary" />, label: "READINESS", value: "Ready for Opportunities" },
-  { icon: <Zap size={18} className="text-primary" />, label: "LEVEL", value: "Website Developer" },
-  { icon: <Code size={18} className="text-primary" />, label: "MODE", value: "Developing" },
+  { icon: <Terminal size={18} className="text-primary" />, label: "READINESS", value: "Available for Hire" },
+  { icon: <Zap size={18} className="text-primary" />, label: "ROLE", value: "Full-Stack Developer" },
+  { icon: <Code size={18} className="text-primary" />, label: "STATUS", value: "Actively Interviewing" },
 ];
 
 export default function StatusGrid() {

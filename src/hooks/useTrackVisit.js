@@ -17,13 +17,7 @@ export const useTrackVisit = () => {
           page: window.location.pathname
         };
 
-        // 1. Log to Local SQL API (If URL override or env exists)
-        const apiUrl = localStorage.getItem('VITE_API_URL_OVERRIDE') || import.meta.env.VITE_API_URL || 'http://localhost:5000';
-        fetch(`${apiUrl}/api/track`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(visitData)
-        }).catch(() => {/* Silent fail for SQL */});
+        // Removed local SQL tracking
 
         // 2. Log to Firestore (Live Fallback)
         await trackVisitFirestore(visitData);
