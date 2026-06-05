@@ -3,7 +3,7 @@ export const PRO_START_DATE = '2025-03-01'; // March 2025
 export const experiences = [
   {
     id: "EXP_001",
-    role: "FULL-STACK WEB DEVELOPER",
+    role: "JR. WEBSITE DEVELOPER",
     company: "Perfect Pixels",
     link: "https://www.perfectpixel.co.in",
     startDate: "2025-09-01",
@@ -13,7 +13,7 @@ export const experiences = [
   },
   {
     id: "EXP_002",
-    role: "FULL-STACK DEVELOPER INTERN",
+    role: "WEBSITE DEVELOPER INTERN",
     company: "Venom Technologies",
     link: "https://www.venomtechnologies.in",
     startDate: "2025-03-27",

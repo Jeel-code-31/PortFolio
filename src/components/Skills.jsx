@@ -17,7 +17,10 @@ const techSkills = [
   { name: 'Figma', color: '#F24E1E', slug: 'figma' },
   { name: 'Sanity', color: '#F03E2F', slug: 'sanity' },
   { name: 'Vercel', color: '#FFFFFF', slug: 'vercel' },
-  { name: 'Wordpress', color: '#21759B', slug: 'wordpress' }
+  { name: 'Wordpress', color: '#21759B', slug: 'wordpress' },
+  { name: 'DJ-ANGO', color: '#0f2027', slug: 'django' },
+  { name: 'N8N', color: '#ffffff', slug: 'n8n' }
+
 ];
 
 export default function Skills() {

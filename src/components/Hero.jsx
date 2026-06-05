@@ -62,11 +62,11 @@ export default function Hero() {
           </motion.h1>
 
           <motion.h2 variants={itemVariants} className="text-xl md:text-2xl font-mono text-secondary tracking-widest uppercase mb-8 ml-1">
-            FULL-STACK WEB DEVELOPER
+           WEBSITE DEVELOPER
           </motion.h2>
 
           <motion.p variants={itemVariants} className="text-gray-400 text-base md:text-lg leading-relaxed max-w-2xl mb-12 border-l-2 border-primary/30 pl-4">
-            A passionate Full-Stack Web Developer skilled in HTML, CSS, JavaScript, React, Node.js, PHP, and SQL. Building modern, scalable web applications with robust backend architectures and intuitive, responsive frontend designs.
+           I'm a WEBSITE DEVELOPER. I build modern, scalable web applications with robust backend architectures and intuitive, responsive frontend designs.
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex flex-wrap gap-6 items-center font-mono text-sm">
