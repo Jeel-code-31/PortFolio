@@ -2,13 +2,7 @@ import { db } from '../firebase';
 import { 
   collection, 
   addDoc, 
-  getDocs, 
-  query, 
-  orderBy, 
-  limit, 
-  where,
-  Timestamp,
-  getCountFromServer
+  Timestamp 
 } from 'firebase/firestore';
 
 const VISITS_COLLECTION = 'visits';
@@ -28,5 +22,3 @@ export const trackVisitFirestore = async (visitData) => {
     console.error('[FIREBASE] Tracking failed:', err);
   }
 };
-
-

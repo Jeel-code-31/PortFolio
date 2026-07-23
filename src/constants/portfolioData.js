@@ -9,7 +9,7 @@ export const experiences = [
     startDate: "2025-09-01",
     endDate: null, // Present
     description: "Develop modern web interfaces and managing backend architecture, building scalable digital assets with robust full-stack solutions.",
-    skills: ["Next.js", "Sanity", "Node.js", "React", "Github", 'vercel', 'css3']
+    skills: ["Next.js", "Sanity", "Node.js", "React", "Github", 'vercel', 'css3','Wordpress','PHP','UI Design','API Integeration','Auth']
   },
   {
     id: "EXP_002",

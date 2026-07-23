@@ -14,13 +14,14 @@ const firebaseConfig = {
 let app, auth, db;
 
 try {
-  if (import.meta.env.VITE_FIREBASE_API_KEY) {
+  const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
+  if (apiKey && apiKey !== 'your_api_key') {
     app = initializeApp(firebaseConfig);
     auth = getAuth(app);
     db = getFirestore(app);
     console.log('[FIREBASE] Initialized successfully');
   } else {
-    console.warn('[FIREBASE] Missing API Key. Firebase features will be disabled.');
+    console.warn('[FIREBASE] Missing or placeholder API Key. Firebase features will be disabled until valid credentials are added to .env');
   }
 } catch (err) {
   console.error('[FIREBASE] Initialization error:', err);

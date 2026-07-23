@@ -52,7 +52,7 @@ const PortfolioLayout = ({ isLoading, setIsLoading }) => {
           </main>
           
           <footer className="text-center py-8 text-primary/50 text-xs font-mono tracking-widest border-t border-primary/10">
-            <p>// SYSTEM ONLINE. © 2025 JEEL DARJI _</p>
+            <p>// SYSTEM Working. © 2025 JEEL DARJI _</p>
           </footer>
         </>
       )}
