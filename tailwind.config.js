@@ -13,8 +13,10 @@ export default {
         secondary: '#8b5cf6',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        mono: ['Fira Code', 'Courier New', 'monospace'],
+        sans: ['Outfit', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        heading: ['Plus Jakarta Sans', 'Outfit', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Space Grotesk', 'monospace'],
+        display: ['Space Grotesk', 'Outfit', 'sans-serif'],
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
